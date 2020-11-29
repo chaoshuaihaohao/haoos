@@ -10,3 +10,6 @@
 [submodule "busybox"]
 	path = busybox
 	url = git@github.com:mirror/busybox.git
+[submodule "systemd"]
+	path = systemd
+	url = git@github.com:systemd/systemd.git
