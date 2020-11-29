@@ -4,3 +4,6 @@
 [submodule "grub2"]
 	path = grub2
 	url = https://git.savannah.gnu.org/git/grub.git
+[submodule "linux"]
+	path = linux
+	url = git@github.com:torvalds/linux.git
