@@ -1,0 +1,20 @@
+How to Install
+
+============================================================
+make depends
+make
+make run
+============================================================
+
+
+
+
+edk2
+UEFI of haoos
+
+grub2
+bootloader of haoos
+
+initramfs-tools
+initrd制作工具,用于制作initramfs.img.详情参见https://wiki.debian.org/initramfs-tools
+
