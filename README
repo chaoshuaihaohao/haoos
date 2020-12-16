@@ -2,6 +2,11 @@ How to Install
 
 ============================================================
 make depends
+sudo ./run.sh
+#添加账户
+adduser haoos
+passwd haoos
+
 make
 make run
 ============================================================
