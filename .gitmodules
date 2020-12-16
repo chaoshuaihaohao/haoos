@@ -13,3 +13,6 @@
 [submodule "systemd"]
 	path = systemd
 	url = git@github.com:systemd/systemd.git
+[submodule "dde-file-manager"]
+	path = dde-file-manager
+	url = git@github.com:linuxdeepin/dde-file-manager.git
