@@ -122,28 +122,12 @@ fi
 if [ ! -e $ISO_DIR/rootfs/sbin/init ];then
 	echo "rootfs not have debian file system, try to build rootfs ......"
 	debootstrap stable $ISO_DIR/rootfs https://www.debian.org/mirror/list
-	echo "build rootfs successed"
 	if [ ! -e $ISO_DIR/rootfs/boot/EFI ];then
 		cp $ISO_DIR/grub/* $ISO_DIR/rootfs/boot/ -a
 	fi
 	if [ ! -e $ISO_DIR/rootfs/boot/vmlinuz-$(`uname -r`) ];then
 		cp $ISO_DIR/boot/* $ISO_DIR/rootfs/boot/ -a
 	fi
+	echo "build rootfs successed"
 fi
-
-#[200~No protocol specified
-#Unable to init server: Could not connect: Connection refused
-#gtk initialization failed
-#]
-
-
-#qemu start haoos systemd
-qemu-img convert -O qcow2 $ISO_DIR/haoos.img $ISO_DIR/qemu-haoos.img
-echo "qemu-img convert -O qcow2 $ISO_DIR/haoos.img $ISO_DIR/qemu-haoos.img" >> log.txt 
-echo "qemu-system-x86_64 -m 1G \
-    -bios $HAOOS_DIR/edk2/Build/OvmfX64/DEBUG_GCC5/FV/OVMF.fd \
-    -hda $ISO_DIR/qemu-haoos.img" >> log.txt 
-qemu-system-x86_64 -m 1G \
-    -bios $HAOOS_DIR/edk2/Build/OvmfX64/DEBUG_GCC5/FV/OVMF.fd \
-    -hda $ISO_DIR/qemu-haoos.img
 

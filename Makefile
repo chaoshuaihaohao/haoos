@@ -46,10 +46,11 @@ grub_cfg:
 
 run:
 	make grub_cfg
-	qemu-img convert -O qcow2 $(ISO_DIR)/haoos.img $(ISO_DIR)/qemu-haoos.img
+	sudo qemu-img convert -O qcow2 $(ISO_DIR)/haoos.img $(ISO_DIR)/qemu-haoos.img
 	qemu-system-x86_64 -m 1G -smp 4 -machine accel=kvm \
 		-bios $(HAOOS_DIR)/edk2/Build/OvmfX64/DEBUG_GCC5/FV/OVMF.fd \
-		-hda $(ISO_DIR)/qemu-haoos.img -boot order=dc #\
+		-hda $(ISO_DIR)/qemu-haoos.img \
+		-netdev user,id=vmnic,smb=/
 	#	-nographic
 clean:
 	make -C linux clean

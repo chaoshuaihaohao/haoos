@@ -17,3 +17,7 @@
 	
 	1)更改debian仓库路径为国内源https://www.debian.org/mirror/list,极大的提高了debootstrap创建
 	文件系统的速度.
+	2)qemu命令行添加"-netdev user,id=vmnic,smb=/",解决了UEFI在>>>
+	BdsDxe: failed to load Boot0001 "UEFI QEMU DVD-ROM QM00003 " from PciRoot(0x0)/Pci(0x1,0x1)/Ata(Secondary,Master,0x0): Not Found
+	BdsDxe: failed to load Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1,0x1)/Ata(Primary,Master,0x0): Not Found
+	<<<界面停留太久的问题,现在启动后可以立刻进入UEFI shell界面.
