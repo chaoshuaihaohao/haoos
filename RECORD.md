@@ -12,3 +12,8 @@
 
 	3)qemu启动虚拟机命令行优化
 	qemu命令行添加 -smp 4 -machine accel=kvm,内核启动耗时缩减至5秒内,提高巨大.
+
+2020/12/20
+	
+	1)更改debian仓库路径为国内源https://www.debian.org/mirror/list,极大的提高了debootstrap创建
+	文件系统的速度.
