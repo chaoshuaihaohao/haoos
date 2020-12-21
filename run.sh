@@ -13,6 +13,10 @@ SCRIPTS_DIR=/home/uos/Backup/github/haoos/iso/scripts
 KERNEL_VERSION=`uname -r`
 
 echo "start" > log.txt
+if [ ! -e $ISO_DIR ];then
+	mkdir -p $ISO_DIR
+fi
+
 #make iso and mount file
 # create the hd disk img
 if [ ! -e $ISO_DIR/haoos.img ];then
@@ -128,6 +132,4 @@ if [ ! -e $ISO_DIR/rootfs/sbin/init ];then
 	if [ ! -e $ISO_DIR/rootfs/boot/vmlinuz-$(`uname -r`) ];then
 		cp $ISO_DIR/boot/* $ISO_DIR/rootfs/boot/ -a
 	fi
-	echo "build rootfs successed"
 fi
-

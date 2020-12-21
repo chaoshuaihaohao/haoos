@@ -1,6 +1,7 @@
 HAOOS_DIR=/home/uos/Backup/github/haoos
 ISO_DIR=/home/uos/Backup/github/haoos/iso
 SCRIPTS_DIR=/home/uos/Backup/github/haoos/iso/scripts
+BOOT_DIR=/home/uos/Backup/github/haoos/iso/boot
 GRUB_DIR=/home/uos/Backup/github/haoos/iso/grub
 GRUB_CFG=$(GRUB_DIR)/grub/grub.cfg
 ROOTFS_DIR=/home/uos/Backup/github/haoos/iso/rootfs
@@ -47,7 +48,7 @@ grub_cfg:
 run:
 	make grub_cfg
 	sudo qemu-img convert -O qcow2 $(ISO_DIR)/haoos.img $(ISO_DIR)/qemu-haoos.img
-	qemu-system-x86_64 -m 1G -smp 4 -machine accel=kvm \
+	sudo qemu-system-x86_64 -m 1G -smp 4 -machine accel=kvm \
 		-bios $(HAOOS_DIR)/edk2/Build/OvmfX64/DEBUG_GCC5/FV/OVMF.fd \
 		-hda $(ISO_DIR)/qemu-haoos.img \
 		-netdev user,id=vmnic,smb=/
@@ -62,3 +63,7 @@ clean:
 	rm -r boot  dev  etc  home  lib  lib64 media  mnt  opt  proc  root  run  srv  sys  tmp  usr  var
 	cd -
 
+umount:
+	sudo umount $(BOOT_DIR)
+	sudo umount $(GRUB_DIR)
+	sudo umount $(ROOTFS_DIR)
