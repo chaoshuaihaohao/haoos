@@ -1,8 +1,14 @@
 How to Install
 
+git submodule update --init edk2
+git submodule update --init grub2
+编译edk2和grub2模块
 ============================================================
 make depends
-sudo ./run.sh
+sudo su
+export DESTDIR=<the path of haoos>
+./run.sh
+chroot rootfs
 #添加账户
 adduser haoos
 passwd haoos

@@ -4,12 +4,20 @@ apt install debootstrap kpartx qemu-kvm
 #edk2 depends
 apt install acpica-tools nasm libx11-dev libxext-dev
 #grub depends
-sudo apt install libdevmapper-dev fonts-dejavu libfuse-dev ttf-dejavu libzfslinux-dev liblzma-dev flex bison
+sudo apt install -y libdevmapper-dev fonts-dejavu libfuse-dev ttf-dejavu libzfslinux-dev liblzma-dev flex bison
 
+if test -z "$DESTDIR"                                                                                                                                                                                                
+then                                                                                                                                                                                                                 
+	echo "Please specific the DESTDIR of haoos"
+	echo "you can export DESTDIR = the path of haoos directory"
+	exit
+else                                                                                                                                                                                                                 
+	echo "DESTDIR is set to $DESTDIR!"                                                                                                                                                                                            
+fi 
 
-HAOOS_DIR=/home/uos/Backup/github/haoos
-ISO_DIR=/home/uos/Backup/github/haoos/iso
-SCRIPTS_DIR=/home/uos/Backup/github/haoos/iso/scripts
+HAOOS_DIR=$DESTDIR
+ISO_DIR=$HAOOS_DIR/iso
+SCRIPTS_DIR=$HAOOS_DIR/iso/scripts
 KERNEL_VERSION=`uname -r`
 
 echo "start" > log.txt
@@ -68,6 +76,7 @@ else
 fi
 #install grub
 if [ ! -e $HAOOS_DIR/grub2/grub-install ];then
+    $HAOOS_DIR/grub2/configure
     make -C $HAOOS_DIR/grub2 -j32
 fi
 
