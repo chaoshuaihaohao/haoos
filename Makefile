@@ -1,13 +1,14 @@
+#HAOOS_DIR=$(DESTDIR)
 HAOOS_DIR=/home/uos/Backup/github/haoos
-ISO_DIR=/home/uos/Backup/github/haoos/iso
-SCRIPTS_DIR=/home/uos/Backup/github/haoos/iso/scripts
-BOOT_DIR=/home/uos/Backup/github/haoos/iso/boot
-GRUB_DIR=/home/uos/Backup/github/haoos/iso/grub
+ISO_DIR=$(HAOOS_DIR)/iso
+SCRIPTS_DIR=$(HAOOS_DIR)/iso/scripts
+BOOT_DIR=$(HAOOS_DIR)/iso/boot
+GRUB_DIR=$(HAOOS_DIR)/iso/grub
 GRUB_CFG=$(GRUB_DIR)/grub/grub.cfg
-ROOTFS_DIR=/home/uos/Backup/github/haoos/iso/rootfs
-export EDK_TOOLS_PATH=/home/uos/Backup/github/haoos/edk2/BaseTools
-export WORKSPACE=/home/uos/Backup/github/haoos/edk2
-export CONF_PATH=/home/uos/Backup/github/haoos/edk2/Conf	
+ROOTFS_DIR=$(HAOOS_DIR)/iso/rootfs
+export EDK_TOOLS_PATH=$(HAOOS_DIR)/edk2/BaseTools
+export WORKSPACE=$(HAOOS_DIR)/edk2
+export CONF_PATH=$(HAOOS_DIR)/edk2/Conf
 KERNEL_VERSION=`uname -r`
 DISK-UUID=$(shell ls -l /dev/disk/by-uuid/ | grep dm-2 | awk -F " " '{print $$9}')
 VMLINUZ=vmlinuz-$(KERNEL_VERSION)
@@ -15,11 +16,11 @@ INITRD=initrd.img-$(KERNEL_VERSION)
 
 depends:
 	#install depends packets
-	sudo apt install debootstrap kpartx qemu-kvm
+	sudo apt install -y debootstrap kpartx qemu-kvm
 	#edk2 depends
-	sudo apt install acpica-tools nasm libx11-dev libxext-dev
+	sudo apt install -y acpica-tools nasm libx11-dev libxext-dev
 	#grub depends
-	sudo apt install libdevmapper-dev fonts-dejavu libfuse-dev \
+	sudo apt install -y libdevmapper-dev fonts-dejavu libfuse-dev \
 		ttf-dejavu libzfslinux-dev liblzma-dev flex bison 
 
 edk2:
