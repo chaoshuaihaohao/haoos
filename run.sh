@@ -134,7 +134,7 @@ fi
 #debootstrap make install the file system
 if [ ! -e $ISO_DIR/rootfs/sbin/init ];then
 	echo "rootfs not have debian file system, try to build rootfs ......"
-	debootstrap stable $ISO_DIR/rootfs https://www.debian.org/mirror/list
+	debootstrap stable $ISO_DIR/rootfs http://ftp2.cn.debian.org/debian/
 	if [ ! -e $ISO_DIR/rootfs/boot/EFI ];then
 		cp $ISO_DIR/grub/* $ISO_DIR/rootfs/boot/ -a
 	fi
