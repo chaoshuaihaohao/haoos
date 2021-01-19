@@ -8,11 +8,11 @@ sudo apt install -y libdevmapper-dev fonts-dejavu libfuse-dev ttf-dejavu libzfsl
 
 if test -z "$DESTDIR"                                                                                                                                                                                                
 then                                                                                                                                                                                                                 
-	echo "Please specific the DESTDIR of haoos"
-	echo "you can export DESTDIR = the path of haoos directory"
-	exit
+	echo "the DESTDIR of haoos is not set"
+	DESTDIR=`pwd`
+	echo "set the default path $DESTDIR"
 else                                                                                                                                                                                                                 
-	echo "DESTDIR is set to $DESTDIR!"                                                                                                                                                                                            
+	echo "DESTDIR is set to $DESTDIR!"
 fi 
 
 HAOOS_DIR=$DESTDIR
