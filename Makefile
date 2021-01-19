@@ -1,14 +1,15 @@
 #HAOOS_DIR=$(DESTDIR)
 HAOOS_DIR=/home/uos/Backup/github/haoos
+SUB_DIR=/home/uos/Backup/github/haoos/submodules
 ISO_DIR=$(HAOOS_DIR)/iso
 SCRIPTS_DIR=$(HAOOS_DIR)/iso/scripts
 BOOT_DIR=$(HAOOS_DIR)/iso/boot
 GRUB_DIR=$(HAOOS_DIR)/iso/grub
 GRUB_CFG=$(GRUB_DIR)/grub/grub.cfg
 ROOTFS_DIR=$(HAOOS_DIR)/iso/rootfs
-export EDK_TOOLS_PATH=$(HAOOS_DIR)/edk2/BaseTools
-export WORKSPACE=$(HAOOS_DIR)/edk2
-export CONF_PATH=$(HAOOS_DIR)/edk2/Conf
+export EDK_TOOLS_PATH=$(SUB_DIR)/edk2/BaseTools
+export WORKSPACE=$(SUB_DIR)/edk2
+export CONF_PATH=$(SUB_DIR)/edk2/Conf
 KERNEL_VERSION=`uname -r`
 DISK-UUID=$(shell ls -l /dev/disk/by-uuid/ | grep dm-2 | awk -F " " '{print $$9}')
 VMLINUZ=vmlinuz-$(KERNEL_VERSION)
@@ -50,7 +51,7 @@ run:
 	make grub_cfg
 	sudo qemu-img convert -O qcow2 $(ISO_DIR)/haoos.img $(ISO_DIR)/qemu-haoos.img
 	sudo qemu-system-x86_64 -m 1G -smp 4 -machine accel=kvm \
-		-bios $(HAOOS_DIR)/edk2/Build/OvmfX64/DEBUG_GCC5/FV/OVMF.fd \
+		-bios $(SUB_DIR)/edk2/Build/OvmfX64/DEBUG_GCC5/FV/OVMF.fd \
 		-hda $(ISO_DIR)/qemu-haoos.img \
 		-netdev bridge,br=br0,id=n1 -device virtio-net,netdev=n1
 	#	-boot menu=on

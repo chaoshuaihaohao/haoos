@@ -1,18 +1,24 @@
 [submodule "edk2"]
-	path = edk2
+	path = submodules/edk2
 	url = https://github.com/tianocore/edk2.git
 [submodule "grub2"]
-	path = grub2
+	path = submodules/grub2
 	url = https://git.savannah.gnu.org/git/grub.git
 [submodule "linux"]
-	path = linux
+	path = submodules/linux
 	url = git@github.com:torvalds/linux.git
 [submodule "busybox"]
-	path = busybox
+	path = submodules/busybox
 	url = git@github.com:mirror/busybox.git
 [submodule "systemd"]
-	path = systemd
+	path = submodules/systemd
 	url = git@github.com:systemd/systemd.git
 [submodule "dde-file-manager"]
-	path = dde-file-manager
+	path = submodules/dde-file-manager
 	url = git@github.com:linuxdeepin/dde-file-manager.git
+[submodule "linux-firmware"]
+	path = submodules/linux-firmware
+	url = https://mirrors.bfsu.edu.cn/git/linux-firmware.git
+[submodule "initramfs-tools"]
+	path = submodules/initramfs-tools
+	url = https://salsa.debian.org/kernel-team/initramfs-tools.git

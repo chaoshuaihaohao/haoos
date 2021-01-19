@@ -16,6 +16,7 @@ else
 fi 
 
 HAOOS_DIR=$DESTDIR
+SUB_DIR=$DESTDIR/submodules
 ISO_DIR=$HAOOS_DIR/iso
 SCRIPTS_DIR=$HAOOS_DIR/iso/scripts
 KERNEL_VERSION=`uname -r`
@@ -75,17 +76,17 @@ else
     fi
 fi
 #install grub
-if [ ! -e $HAOOS_DIR/grub2/grub-install ];then
-    $HAOOS_DIR/grub2/configure
-    make -C $HAOOS_DIR/grub2 -j32
+if [ ! -e $SUB_DIR/grub2/grub-install ];then
+    $SUB_DIR/grub2/configure
+    make -C $SUB_DIR/grub2 -j32
 fi
 
 if [ ! -e $ISO_DIR/grub/EFI/grub/grubx64.efi ];then
-echo "$HAOOS_DIR/grub2/grub-install \
+echo "$SUB_DIR/grub2/grub-install \
     --boot-directory=$HAOOS_DIR/iso/grub \
     --efi-directory=$HAOOS_DIR/iso/grub \
     --directory=/usr/lib/grub/x86_64-efi /dev/mapper/loop200p1" >> log.txt 
-$HAOOS_DIR/grub2/grub-install \
+$SUB_DIR/grub2/grub-install \
     --boot-directory=$HAOOS_DIR/iso/grub \
     --efi-directory=$HAOOS_DIR/iso/grub \
     --directory=/usr/lib/grub/x86_64-efi /dev/mapper/loop200p1
