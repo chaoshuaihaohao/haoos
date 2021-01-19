@@ -21,3 +21,22 @@
 	BdsDxe: failed to load Boot0001 "UEFI QEMU DVD-ROM QM00003 " from PciRoot(0x0)/Pci(0x1,0x1)/Ata(Secondary,Master,0x0): Not Found
 	BdsDxe: failed to load Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1,0x1)/Ata(Primary,Master,0x0): Not Found
 	<<<界面停留太久的问题,现在启动后可以立刻进入UEFI shell界面.
+
+2021/01/19								   
+
+	1)qemu添加"-netdev bridge,br=br0,id=n1 -device virtio-net,netdev=n1"参数，搭建网桥使主机和虚拟机可以进行网络通信。
+	主机需要:
+	sudo apt install bridge-utils
+	#主机创建一个网桥br0
+	brctl addbr br0
+	#把主机网口eno1接到网桥上，结果主机上不了网
+	brctl addif br0 eno1
+	#给网桥分配ip，得到的ip和主机网口eno1是同一个ip。可以上网了。
+	dhclient br0
+	#qemu虚拟机命令如下，启动后主机自动生成了虚拟机网口tap0，并且tap是挂接到br0上的。
+	#给br0分配ip后，qemu虚拟机里的网口ens3也有了ip。
+	#从虚拟机里ping主机eno1 ip，可以ping通。成功让虚拟机联网。
+	sudo qemu-system-x86_64 -m 1G -smp 4 -machine accel=kvm \
+	-bios /home/uos/Backup/github/haoos/edk2/Build/OvmfX64/DEBUG_GCC5/FV/OVMF.fd \
+	-hda /home/uos/Backup/github/haoos/iso/qemu-haoos.img \
+	-netdev bridge,br=br0,id=n1 -device virtio-net,netdev=n1

@@ -52,7 +52,8 @@ run:
 	sudo qemu-system-x86_64 -m 1G -smp 4 -machine accel=kvm \
 		-bios $(HAOOS_DIR)/edk2/Build/OvmfX64/DEBUG_GCC5/FV/OVMF.fd \
 		-hda $(ISO_DIR)/qemu-haoos.img \
-		-netdev user,id=vmnic,smb=/
+		-netdev bridge,br=br0,id=n1 -device virtio-net,netdev=n1
+	#	-boot menu=on
 	#	-nographic
 clean:
 	make -C linux clean
