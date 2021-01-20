@@ -136,10 +136,13 @@ fi
 if [ ! -e $ISO_DIR/rootfs/sbin/init ];then
 	echo "rootfs not have debian file system, try to build rootfs ......"
 	debootstrap stable $ISO_DIR/rootfs http://ftp2.cn.debian.org/debian/
+	if [ ! -e $ISO_DIR/rootfs/boot ];then
+		mkdir -p $ISO_DIR/rootfs/boot
+	fi
 	if [ ! -e $ISO_DIR/rootfs/boot/EFI ];then
 		cp $ISO_DIR/grub/* $ISO_DIR/rootfs/boot/ -a
 	fi
-	if [ ! -e $ISO_DIR/rootfs/boot/vmlinuz-$(`uname -r`) ];then
+	if [ ! -e $ISO_DIR/rootfs/boot/vmlinuz-`uname -r` ];then
 		cp $ISO_DIR/boot/* $ISO_DIR/rootfs/boot/ -a
 	fi
 fi
