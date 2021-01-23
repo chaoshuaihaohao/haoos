@@ -22,3 +22,6 @@
 [submodule "initramfs-tools"]
 	path = submodules/initramfs-tools
 	url = https://salsa.debian.org/kernel-team/initramfs-tools.git
+[submodule "submodules/calamares"]
+	path = submodules/calamares
+	url = git@github.com:calamares/calamares.git
